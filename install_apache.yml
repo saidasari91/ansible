@@ -1,0 +1,30 @@
+#---
+
+#- hosts: all
+ # become: true
+  #tasks:
+
+ # - name: install apache package
+   # ansible.builtin.dnf:
+  #    name: httpd 
+ #     state: present 
+#  - name: Start and enable Apache ansible.builtin.service: name: httpd state: started enabled: true
+
+
+---
+- name: Install Apache on Amazon Linux
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Apache
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Start and enable Apache
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+

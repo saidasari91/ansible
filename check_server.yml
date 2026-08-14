@@ -1,0 +1,14 @@
+---
+- name: Check EC2 server information
+  hosts: all
+
+  tasks:
+    - name: Check server uptime
+      ansible.builtin.shell: "uptime"
+      register: uptime_output
+      changed_when: false
+
+    - name: Display uptime
+      ansible.builtin.debug:
+        var: uptime_output.stdout
+

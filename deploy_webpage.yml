@@ -1,0 +1,25 @@
+---
+- name: Deploy webpage to Apache
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Make sure Apache is installed
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+
+    - name: Make sure Apache is running
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Copy custom webpage
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: "0644"
+
